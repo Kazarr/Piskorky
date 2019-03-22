@@ -12,9 +12,9 @@ namespace Piskorky
 {
     public partial class NewGame : Form
     {
-        public int PlayLenght { get; set; }
-        public int PlayWidth { get; set; }
-        public int WinCondition { get; set; }
+        //public int PlayLenght { get; set; }
+        //public int PlayWidth { get; set; }
+        //public int WinCondition { get; set; }
         public NewGame()
         {
             InitializeComponent();
@@ -22,13 +22,13 @@ namespace Piskorky
 
         private void btn_Play_Click(object sender, EventArgs e)
         {
-            int input;
-            bool success = int.TryParse(txt_Lenght.Text, out input);
-            PlayLenght = input;
-            success = int.TryParse(txt_Width.Text, out input);
-            PlayWidth = input;
-            success = int.TryParse(txt_WinCondition.Text, out input);
-            WinCondition = input;
+            int lenght;
+            int width;
+            int winCondition;
+            bool success = int.TryParse(txt_Lenght.Text, out lenght);
+            success = int.TryParse(txt_Width.Text, out width);
+            success = int.TryParse(txt_WinCondition.Text, out winCondition);
+            Logic result = new Logic(lenght, width, winCondition);
             DialogResult = DialogResult.OK;
         }
 

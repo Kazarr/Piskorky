@@ -21,6 +21,13 @@ namespace Piskorky
                 dtgw_PlaingField.Rows.Add();
             }
         }
+        //private bool checkWin()
+        //{
+        //    for(int i = 0; i < dtgw_PlaingField.Width; i++)
+        //    {
+        //        dtgw
+        //    }
+        //}
 
         private void dtgw_PlaingField_CellClick(object sender, DataGridViewCellEventArgs e)
         {

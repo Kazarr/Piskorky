@@ -30,7 +30,7 @@ namespace Piskorky
                 {
                     using(PlaingField)
                     {
-                        PlaingField table = new PlaingField(NewGame.PlayLenght, NewGame.PlayWidth);
+                        PlaingField table = new PlaingField(, NewGame.PlayWidth);
 
                         var dialogResultPlaingField = table.ShowDialog();
                     }
