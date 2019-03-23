@@ -12,27 +12,31 @@ namespace Piskorky
 {
     public partial class Form1 : Form
     {
-        public NewGame NewGame { get; set; } = new NewGame();
+        public NewGame NewGame { get; set; }
         public PlaingField PlaingField { get; set; }
+		public Logic Logic { get; set; }
 
-        public Form1()
+		public Form1()
         {
             InitializeComponent();
         }
 
         private void btn_NewGame_Click(object sender, EventArgs e)
         {
+			NewGame = new NewGame();
             using (NewGame)
             {
-                var dialogResultNewGame = NewGame.ShowDialog();
+				Logic = new Logic();
+				var dialogResultNewGame = NewGame.ShowDialog();
                 var isDialogResultOK = dialogResultNewGame == DialogResult.OK;
-                if (isDialogResultOK)
+				Logic = NewGame.Logic;
+				if (isDialogResultOK)
                 {
+
+					PlaingField = new PlaingField(Logic);
                     using(PlaingField)
                     {
-                        PlaingField table = new PlaingField(, NewGame.PlayWidth);
-
-                        var dialogResultPlaingField = table.ShowDialog();
+						var dialogResultPlayinField = PlaingField.ShowDialog();
                     }
                 }
 

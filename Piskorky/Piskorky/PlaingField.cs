@@ -10,28 +10,37 @@ using System.Windows.Forms;
 
 namespace Piskorky
 {
-    public partial class PlaingField : Form
-    {
-        public PlaingField(int lenght, int width)
+	public partial class PlaingField : Form
+	{
+		public Logic Logic { get; }
+		public int Turn { get; set; }
+        public PlaingField(Logic logic)
         {
             InitializeComponent();
-            for(int i = 0; i < lenght; i++)
-            {
-                dtgw_PlaingField.Columns.Add($"{i}", $"{i}");
-                dtgw_PlaingField.Rows.Add();
-            }
-        }
-        //private bool checkWin()
-        //{
-        //    for(int i = 0; i < dtgw_PlaingField.Width; i++)
-        //    {
-        //        dtgw
-        //    }
-        //}
+			Logic = logic;
+			Logic.CreatePlaingFiled(Logic.Settings.Size, dtgw_PlaingField);
+			//for(int i = 0; i < logic.Settings.Size; i++)
+			//{
+			//    dtgw_PlaingField.Columns.Add($"{i}", $"{i}");
+			//    dtgw_PlaingField.Rows.Add();
+			//}
+		}
+
 
         private void dtgw_PlaingField_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dtgw_PlaingField[e.ColumnIndex, e.RowIndex].Value = "X";
-        }
-    }
+			
+			Logic.Mark(dtgw_PlaingField, e, Turn);
+			Turn++;
+		}
+
+		private void dtgw_PlaingField_KeyPress(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+			{
+				Close();
+			}
+		}
+
+	}
 }
