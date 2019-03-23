@@ -37,6 +37,7 @@ namespace Piskorky
                     using(PlaingField)
                     {
 						var dialogResultPlayinField = PlaingField.ShowDialog();
+
                     }
                 }
 

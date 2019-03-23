@@ -19,19 +19,20 @@ namespace Piskorky
             InitializeComponent();
 			Logic = logic;
 			Logic.CreatePlaingFiled(Logic.Settings.Size, dtgw_PlaingField);
-			//for(int i = 0; i < logic.Settings.Size; i++)
-			//{
-			//    dtgw_PlaingField.Columns.Add($"{i}", $"{i}");
-			//    dtgw_PlaingField.Rows.Add();
-			//}
 		}
 
 
         private void dtgw_PlaingField_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-			
-			Logic.Mark(dtgw_PlaingField, e, Turn);
-			Turn++;
+			if (Logic.IsWin(dtgw_PlaingField, e))
+			{
+				Logic.Mark(dtgw_PlaingField, e, Turn);
+				Turn++;
+			}
+			else
+			{
+				Close();
+			}
 		}
 
 		private void dtgw_PlaingField_KeyPress(object sender, KeyEventArgs e)
