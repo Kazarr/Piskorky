@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btn_NewGame = new System.Windows.Forms.Button();
             this.btn_LoadGame = new System.Windows.Forms.Button();
-            this.btn_SaveGame = new System.Windows.Forms.Button();
             this.btn_Exit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -63,20 +62,7 @@
             this.btn_LoadGame.TabIndex = 1;
             this.btn_LoadGame.Text = "Load game";
             this.btn_LoadGame.UseVisualStyleBackColor = false;
-            // 
-            // btn_SaveGame
-            // 
-            this.btn_SaveGame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_SaveGame.BackColor = System.Drawing.SystemColors.Menu;
-            this.btn_SaveGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_SaveGame.Location = new System.Drawing.Point(538, 429);
-            this.btn_SaveGame.Name = "btn_SaveGame";
-            this.btn_SaveGame.Size = new System.Drawing.Size(75, 23);
-            this.btn_SaveGame.TabIndex = 2;
-            this.btn_SaveGame.Text = "Save game";
-            this.btn_SaveGame.UseVisualStyleBackColor = false;
+            this.btn_LoadGame.Click += new System.EventHandler(this.btn_LoadGame_Click);
             // 
             // btn_Exit
             // 
@@ -85,7 +71,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Exit.BackColor = System.Drawing.SystemColors.Menu;
             this.btn_Exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_Exit.Location = new System.Drawing.Point(538, 458);
+            this.btn_Exit.Location = new System.Drawing.Point(538, 429);
             this.btn_Exit.Name = "btn_Exit";
             this.btn_Exit.Size = new System.Drawing.Size(75, 23);
             this.btn_Exit.TabIndex = 3;
@@ -101,7 +87,6 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1189, 567);
             this.Controls.Add(this.btn_Exit);
-            this.Controls.Add(this.btn_SaveGame);
             this.Controls.Add(this.btn_LoadGame);
             this.Controls.Add(this.btn_NewGame);
             this.Name = "Form1";
@@ -114,7 +99,6 @@
 
         private System.Windows.Forms.Button btn_NewGame;
         private System.Windows.Forms.Button btn_LoadGame;
-        private System.Windows.Forms.Button btn_SaveGame;
         private System.Windows.Forms.Button btn_Exit;
     }
 }

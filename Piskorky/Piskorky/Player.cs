@@ -16,5 +16,17 @@ namespace Piskorky
 			Name = name;
 			Mark = mark;
 		}
+
+        override
+        public string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(Name);
+            sb.Append("\t");
+            sb.Append(Mark);
+            sb.Append("\t");
+            sb.ToString().Substring(0,sb.ToString().Length-1);
+            return sb.ToString();
+        }
 	}
 }

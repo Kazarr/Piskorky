@@ -11,9 +11,7 @@ namespace Piskorky
     {
 		public Settings Settings { get; set; }
 
-		public Logic()
-		{
-		}
+        public Logic() { }
         public Logic(Settings settings)
         {
 			Settings = settings;
@@ -27,9 +25,10 @@ namespace Piskorky
 			}
 		}
 
-		public void Mark(DataGridView dtgw_PlaingField, DataGridViewCellEventArgs e, int turn)
+		public void Mark(DataGridView dtgw_PlaingField, DataGridViewCellEventArgs e)
 		{
-			dtgw_PlaingField[e.ColumnIndex, e.RowIndex].Value = Settings.Players[turn % Settings.Players.Count].Mark;
+			dtgw_PlaingField[e.ColumnIndex, e.RowIndex].Value = Settings.Players[Settings.Turn % Settings.Players.Count].Mark;
+            Settings.Turn++;
 		}
 
         public bool IsWin(DataGridView dtgw_PlaingField, DataGridViewCellEventArgs e)
@@ -120,98 +119,31 @@ namespace Piskorky
             }
             return false;
         }
-
-		//public bool IsWin(DataGridView dtgw_PlaingField, DataGridViewCellEventArgs e)
-		//{
-		//	int countHorizontal = 0;
-		//	int countVertical = 0;
-		//	//int countDiagonalUp = 0;
-		//	//int countDiagonalDown = 0;
-		//	int countDiagonal = 0;
-		//	//if (!(countHorizontal == Settings.WinCondition || 
-		//	//	countVertical == Settings.WinCondition || 
-		//	//	countDiagonalDown == Settings.WinCondition || 
-		//	//	countDiagonalUp == Settings.WinCondition))
-		//	if (!(countHorizontal == Settings.WinCondition ||
-		//	countVertical == Settings.WinCondition ||
-		//	countDiagonal== Settings.WinCondition))
-		//	{
-               
-		//	    foreach (Player p in Settings.Players)
-		//	    {
-  //                  countHorizontal = 1;
-  //                  countVertical = 1;
-  //                  countDiagonal = 1;
-  //                  string previousMark = "";
-  //                  int previousMarkColumn = 0;
-  //                  int previousMarkRow = 0;
-  //                  for (int i = 0; i < dtgw_PlaingField.ColumnCount; i++)
-		//		    {
-  //                      //if (null != dtgw_PlaingField[i,0].Value)
-  //                      //{
-  //                      //if (dtgw_PlaingField[i, 0].Value.Equals(p.Mark)) countHorizontal++;
-  //                      //}
-		//		        for (int j = 0; j < dtgw_PlaingField.RowCount; j++)
-		//		        {
-  //                          if (dtgw_PlaingField[i, j].Value != null)
-  //                          {
-  //                              if (dtgw_PlaingField[i, j].Value.Equals(p.Mark))
-  //                              {
-  //                                  if (previousMark.Equals(dtgw_PlaingField[i, j].Value) &&
-  //                                      previousMarkColumn == dtgw_PlaingField.Columns.IndexOf(dtgw_PlaingField.Columns[i]))
-  //                                  {
-  //                                      previousMarkColumn = dtgw_PlaingField.Columns.IndexOf(dtgw_PlaingField.Columns[i]);
-  //                                      previousMarkRow = dtgw_PlaingField.Rows.IndexOf(dtgw_PlaingField.Rows[j]);
-  //                                      previousMark = (string)dtgw_PlaingField[i, j].Value;
-  //                                      countVertical++;
-  //                                      if (countVertical == Settings.WinCondition)
-  //                                      {
-  //                                          return true;
-  //                                      }
-  //                                  }
-  //                                  else if (previousMark.Equals(dtgw_PlaingField[i, j].Value) &&
-  //                                      previousMarkRow == dtgw_PlaingField.Rows.IndexOf(dtgw_PlaingField.Rows[j]))
-  //                                  {
-  //                                      countVertical++;
-  //                                      if (countVertical == Settings.WinCondition)
-  //                                      {
-  //                                          return true;
-  //                                      }
-  //                                  }else
-  //                                  {
-  //                                      previousMarkColumn = dtgw_PlaingField.Columns.IndexOf(dtgw_PlaingField.Columns[i]);
-  //                                      previousMarkRow = dtgw_PlaingField.Rows.IndexOf(dtgw_PlaingField.Rows[j]);
-  //                                      previousMark = (string)dtgw_PlaingField[i, j].Value;
-  //                                  }
-  //                              }
-  //                              //if (dtgw_PlaingField[i, j].Value.Equals(p.Mark))
-  //                              //{
-  //                              //    
-  //                              //    if (previousMark.Equals(p.Mark))
-  //                              //    {
-  //                              //        countVertical++;
-  //                              //        if (countVertical == Settings.WinCondition)
-  //                              //        {
-  //                              //            return true;
-  //                              //        }
-  //                              //    }
-                                    
-  //                              //}
-
-  //                              if (dtgw_PlaingField[i, j].Value.Equals(p.Mark) && dtgw_PlaingField.Columns[i].Equals(p.Mark))
-  //                              {
-  //                                  if(countDiagonal == Settings.WinCondition)
-  //                                  {
-  //                                      countDiagonal++;
-  //                                  }
-  //                              }
-                                
-  //                          }
-		//		        }
-		//	        }
-		//        }
-		//	}
-  //          return false;
-		//}
+        public string ToString(DataGridView dtgw_PlaingField)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
+            for(int i = 0; i < dtgw_PlaingField.RowCount; i++)
+            {
+                for(int j = 0; j < dtgw_PlaingField.ColumnCount; j++)
+                {
+                    foreach(Player p in Settings.Players)
+                    {
+                        if(dtgw_PlaingField[i, j].Value != null)
+                        {
+                            if (dtgw_PlaingField[i, j].Value.Equals(p.Mark))
+                            {
+                                sb.Append($"{i}");
+                                sb.Append(" ");
+                                sb.Append($"{j}");
+                                sb.Append("\n");
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            return sb.ToString();
+        }
 	}
 }

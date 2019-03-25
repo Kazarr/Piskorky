@@ -19,22 +19,21 @@ namespace Piskorky
 		public Form1()
         {
             InitializeComponent();
+            
         }
 
         private void btn_NewGame_Click(object sender, EventArgs e)
         {
-			NewGame = new NewGame();
             using (NewGame)
             {
-				Logic = new Logic();
-				var dialogResultNewGame = NewGame.ShowDialog();
+                NewGame = new NewGame();
+                var dialogResultNewGame = NewGame.ShowDialog();
                 var isDialogResultOK = dialogResultNewGame == DialogResult.OK;
 				Logic = NewGame.Logic;
 				if (isDialogResultOK)
                 {
-
-					PlaingField = new PlaingField(Logic);
-                    using(PlaingField)
+                    PlaingField = new PlaingField(Logic);
+                    using (PlaingField)
                     {
 						var dialogResultPlayinField = PlaingField.ShowDialog();
                         
@@ -53,6 +52,16 @@ namespace Piskorky
         public void CreatePlayingField()
         {
 
+        }
+
+        private void btn_LoadGame_Click(object sender, EventArgs e, DataGridView dtgw_PlaingField)
+        {
+            PlaingField PlaingField = new PlaingField(Datalayer.Load("C:\\Users\\kardos\\source\\repos\\Piskorky2\\Piskorky\\Piskorky\\bin\\Debug\\Piskorky.txt"));
+            using (PlaingField)
+            {
+                var dialogResultPlayinField = PlaingField.ShowDialog();
+
+            }
         }
     }
 }

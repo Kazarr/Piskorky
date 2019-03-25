@@ -12,21 +12,19 @@ namespace Piskorky
 {
 	public partial class PlaingField : Form
 	{
-		public Logic Logic { get; }
-		public int Turn { get; set; }
+        private Logic _logic;
         public PlaingField(Logic logic)
         {
             InitializeComponent();
-			Logic = logic;
-			Logic.CreatePlaingFiled(Logic.Settings.Size, dtgw_PlaingField);
+			_logic = logic;
+			_logic.CreatePlaingFiled(_logic.Settings.Size, dtgw_PlaingField);
 		}
 
 
         private void dtgw_PlaingField_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Logic.Mark(dtgw_PlaingField, e, Turn);
-            Turn++;
-            if (Logic.IsWin(dtgw_PlaingField, e))
+            _logic.Mark(dtgw_PlaingField, e);
+            if (_logic.IsWin(dtgw_PlaingField, e))
 			{
                 MessageBox.Show("");
                 Close();
@@ -37,9 +35,21 @@ namespace Piskorky
 		{
 			if (e.KeyCode == Keys.Escape)
 			{
-				Close();
+                using (EscMenu EscMenu = new EscMenu(_logic, dtgw_PlaingField))
+                {
+                    var dialogResultEscMenu = EscMenu.ShowDialog();
+                    if (dialogResultEscMenu == DialogResult.OK)
+                    {
+                        EscMenu.Close();
+                    }
+                    else if (dialogResultEscMenu == DialogResult.Abort)
+                    {
+                        EscMenu.Close();
+                        Close();
+                    }
+                }
+                
 			}
 		}
-
 	}
 }
