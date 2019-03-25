@@ -24,15 +24,13 @@ namespace Piskorky
 
         private void dtgw_PlaingField_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-			if (Logic.IsWin(dtgw_PlaingField, e))
+            Logic.Mark(dtgw_PlaingField, e, Turn);
+            Turn++;
+            if (Logic.IsWin(dtgw_PlaingField, e))
 			{
-				Logic.Mark(dtgw_PlaingField, e, Turn);
-				Turn++;
-			}
-			else
-			{
-				Close();
-			}
+                MessageBox.Show("");
+                Close();
+            }
 		}
 
 		private void dtgw_PlaingField_KeyPress(object sender, KeyEventArgs e)
